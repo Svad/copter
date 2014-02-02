@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="map" style="height:800px"></div>
+        </div>
+        <div class="col-md-4">
+            <div class="row" ng-app="app" ng-controller="Orders">
+                <table class="table">
+                    <tr>
+                        <th>Номер заказа</th>
+                        <th>Время доставки (сек)</th>
+                    </tr>
+                    <tr ng-repeat="order in orders | filter:{status:'done'}">
+                        <td class="index">{{$index}}</td><td>{{order.deliveryTime}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/AnimatedMarker.js"></script>
+<script src="js/copter.js"></script>
+<script src="js/station.js"></script>
+<script src="js/order.js"></script>
+<script src="js/manager.js"></script>
+<script src="js/map.js"></script>
+</body>
+</html>
