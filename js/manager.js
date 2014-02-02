@@ -113,13 +113,6 @@ Manager.prototype = {
     )
   },
 
-  orderGenerationLoop: function () {
-    var order = new Order(generateRandomLatLngWithinBounds(), generateRandomLatLngWithinBounds()).addToMap(map);
-    order._index = ++ORDER_INDEX;
-    this.onNewOrder(order);
-    setTimeout(this.orderGenerationLoop.bind(this), ORDER_GENERATION_INTERVAL);
-  },
-
   findClosestStation: function(latlng) {
     //находим свободные станции
     var emptyStations = this.stations
@@ -136,6 +129,17 @@ Manager.prototype = {
         return latlng.distanceTo(station1.coordinates) < latlng.distanceTo(station2.coordinates) ? station1 : station2;
       }
     )
+  },
+
+  orderGenerationLoop: function () {
+    var order = new Order(generateRandomLatLngWithinBounds(), generateRandomLatLngWithinBounds()).addToMap(map);
+    order._index = ++ORDER_INDEX;
+    this.onNewOrder(order);
+    this._generationLoopTid = setTimeout(this.orderGenerationLoop.bind(this), ORDER_GENERATION_INTERVAL);
+  },
+
+  stopGenerationLoop: function(){
+    clearTimeout(this._generationLoopTid);
   }
 };
 

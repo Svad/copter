@@ -23,12 +23,15 @@ function generateRandomLatLngWithinBounds() {
 }
 
 var app = angular.module('app', [])
-  .controller('Orders',['$scope', function($scope){
-      window.$scope = $scope;
-      var manager = new Manager($scope);
-      manager.init();
-      $scope.orders = manager.orders;
+  .controller('Orders', ['$scope', function ($scope) {
+    window.$scope = $scope;
+    var manager = new Manager($scope);
+    manager.init();
+    $scope.orders = manager.orders;
 
+    $scope.stopOrdersGeneration = function(){
+      manager.stopGenerationLoop();
+    }
   }]);
 
 
