@@ -44,6 +44,8 @@ Copter.prototype = {
         this.route.setLatLngs([]);
         this.onStationReturn(this);
     }
+    if(!$scope.$$phase)
+      $scope.$apply();
   },
   onStationReturn: function(){}
 };

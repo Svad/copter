@@ -103,10 +103,6 @@ L.AnimatedMarker = L.Marker.extend({
   },
   // Stop the animation in place
   stop: function () {
-    if (this._tid) {
-      clearTimeout(this._tid);
-    }
-
     this._icon.style[L.DomUtil.TRANSITION] = '';
   },
 

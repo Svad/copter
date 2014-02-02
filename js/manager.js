@@ -67,7 +67,8 @@ Manager.prototype = {
     this.orders.filter(function(order){
       return order.status === Order.statuses.new;
     }).forEach(this.serveOrder.bind(this));
-    this.$scope.$apply();
+    if(!this.$scope.$$phase)
+      this.$scope.$apply();
   },
   /**
    * обслужить зазаз
@@ -113,7 +114,9 @@ Manager.prototype = {
   },
 
   orderGenerationLoop: function () {
-    this.onNewOrder(new Order(generateRandomLatLngWithinBounds(), generateRandomLatLngWithinBounds()).addToMap(map));
+    var order = new Order(generateRandomLatLngWithinBounds(), generateRandomLatLngWithinBounds()).addToMap(map);
+    order._index = ++ORDER_INDEX;
+    this.onNewOrder(order);
     setTimeout(this.orderGenerationLoop.bind(this), ORDER_GENERATION_INTERVAL);
   },
 

@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
 
+    <style>
+        #map {
+            height: 800px;
+        }
+
+        .orders-table-container {
+            height: 800px;
+            overflow-y: scroll;
+        }
+
+        tr.done {
+          background-color: aquamarine;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -15,14 +29,17 @@
             <div id="map" style="height:800px"></div>
         </div>
         <div class="col-md-4">
-            <div class="row" ng-app="app" ng-controller="Orders">
+            <div class="row orders-table-container" ng-app="app" ng-controller="Orders">
                 <table class="table">
                     <tr>
                         <th>Номер заказа</th>
+                        <th>Статус</th>
                         <th>Время доставки (сек)</th>
                     </tr>
-                    <tr ng-repeat="order in orders | filter:{status:'done'}">
-                        <td class="index">{{$index}}</td><td>{{order.deliveryTime}}</td>
+                    <tr ng-repeat="order in orders | orderBy:_index" ng-class="{'done':order.status=='done'}">
+                        <td class="index">{{$index}}</td>
+                        <td>{{order.status}}</td>
+                        <td>{{order.deliveryTime}}</td>
                     </tr>
                 </table>
             </div>

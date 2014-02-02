@@ -1,6 +1,7 @@
 var STATIONS_DISTANCE = 5e3;//километры
 var COPTERS_COUNT = 10;
 var ORDER_GENERATION_INTERVAL = 3000; // мс
+var ORDER_INDEX = 0;
 
 var bounds = L.latLngBounds(L.latLng(55.878777527891785, 37.8204345703125), L.latLng(55.649698632082625, 37.41737365722656));
 var map = L.map('map').setView([55.75, 37.616667], 11);
@@ -23,8 +24,7 @@ function generateRandomLatLngWithinBounds() {
 
 var app = angular.module('app', [])
   .controller('Orders',['$scope', function($scope){
-
-
+      window.$scope = $scope;
       var manager = new Manager($scope);
       manager.init();
       $scope.orders = manager.orders;
